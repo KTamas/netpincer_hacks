@@ -21,8 +21,8 @@ loadScript("http://code.jquery.com/jquery-latest.js", function() {
   xpath = 'form:has(table) > table';
   jQuery(xpath).each(function(i) {
     if (jQuery(this).
-	    find('div[class="cat-logo"] > img').
-	    attr('src') != '/template/_content/happy_logo.gif') {
+	find('div[class="cat-logo"] > img').
+	attr('src') != '/template/_content/happy_logo.gif') {
       jQuery(this).hide();
     }
   });
