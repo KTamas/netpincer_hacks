@@ -23,16 +23,18 @@ loadScript("http://code.jquery.com/jquery-latest.js", function() {
   // alap xpath a szallitokhoz
   base = 'form:has(table) > table';
   // kiszedjuk a szallitasi idoket, es a table-oket
-  $(base).each(function(i) {
+  jQuery(base).each(function(i) {
     // a problemas scriptek kiszedese
-    tables[i] = $(this).html().replace(/\<script\>[\s\S]+?\<\/script\>/g, '');
+    tables[i] = jQuery(this).
+                html().
+		replace(/\<script\>[\s\S]+?\<\/script\>/g, '');
     d_times[i] = parseInt(
-	           $(this).
+	           jQuery(this).
 	           find('tbody > tr > td > table > tbody > tr > td > a > b').
 		   html().
 		   replace(/.*?\(([\d]+) perc\)/,'$1')
 		 );
-    ids[i] = $(this).attr('id');
+    ids[i] = jQuery(this).attr('id');
   });
 
   // rendezes
@@ -47,8 +49,8 @@ loadScript("http://code.jquery.com/jquery-latest.js", function() {
   }
 
   // visszarak!
-  $(base).each(function(i) {
-    $(this).replaceWith(
+  jQuery(base).each(function(i) {
+    jQuery(this).replaceWith(
 	      '<table id="' + 
 	      ids[i] + 
 	      '" class="cat-table" cellspacing="0">' + 
