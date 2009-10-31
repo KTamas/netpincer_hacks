@@ -4,7 +4,9 @@ function loadScript(url, callback) {
   script.src = url;
   var done = false;
   script.onload = script.onreadystatechange = function() {
-    if( !done && ( !this.readyState || this.readyState == "loaded" || this.readyState == "complete") ) {
+    if( !done && (!this.readyState || 
+	           this.readyState == "loaded" || 
+		   this.readyState == "complete") ) {
       done = true;
       callback();
       // Handle memory leak in IE
@@ -18,15 +20,19 @@ function loadScript(url, callback) {
 loadScript("http://code.jquery.com/jquery-latest.js", function() {
   // a <table>-ok, es a szallitasi idok, meg az id-k hogy menjenek a szurok
   var tables=[], d_times=[], ids=[];
-
   // alap xpath a szallitokhoz
   base = 'form:has(table) > table';
   // kiszedjuk a szallitasi idoket, es a table-oket
-  jQuery(base).each(function(i) {
-    tables[i] = jQuery(this).html().replace(/\<script\>[\s\S]+?\<\/script\>/g, '');
-    d_times[i] = parseInt(jQuery(this).find('tbody > tr > td > table > tbody > tr > td > a > b').html().replace(/.*?\(([\d]+) perc\)/,'$1'));
-    ids[i] = jQuery(this).attr('id');
-    jQuery(this).html('abcdef');
+  $(base).each(function(i) {
+    // a problemas scriptek kiszedese
+    tables[i] = $(this).html().replace(/\<script\>[\s\S]+?\<\/script\>/g, '');
+    d_times[i] = parseInt(
+	           $(this).
+	           find('tbody > tr > td > table > tbody > tr > td > a > b').
+		   html().
+		   replace(/.*?\(([\d]+) perc\)/,'$1')
+		 );
+    ids[i] = $(this).attr('id');
   });
 
   // rendezes
@@ -41,7 +47,13 @@ loadScript("http://code.jquery.com/jquery-latest.js", function() {
   }
 
   // visszarak!
-  jQuery(base).each(function(i){
-    jQuery(this).replaceWith('<table id="' + ids[i] + '" class="cat-table" cellspacing="0">' + tables[i] + '</table>');
+  $(base).each(function(i) {
+    $(this).replaceWith(
+	      '<table id="' + 
+	      ids[i] + 
+	      '" class="cat-table" cellspacing="0">' + 
+	      tables[i] + 
+	     '</table>'
+	    );
   });
 });
