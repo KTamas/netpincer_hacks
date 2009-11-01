@@ -5,8 +5,8 @@ function loadScript(url, callback) {
   var done = false;
   script.onload = script.onreadystatechange = function() {
     if( !done && (!this.readyState || 
-	           this.readyState == "loaded" || 
-		   this.readyState == "complete") ) {
+                  this.readyState == "loaded" || 
+                  this.readyState == "complete") ) {
       done = true;
       callback();
       // Handle memory leak in IE
@@ -27,13 +27,13 @@ loadScript("http://code.jquery.com/jquery-latest.js", function() {
     // a problemas scriptek kiszedese
     tables[i] = jQuery(this).
                 html().
-		replace(/\<script\>[\s\S]+?\<\/script\>/g, '');
+                replace(/\<script\>[\s\S]+?\<\/script\>/g, '');
     d_times[i] = parseInt(
-	           jQuery(this).
-	           find('tbody > tr > td > table > tbody > tr > td > a > b').
-		   html().
-		   replace(/.*?\(([\d]+) perc\)/,'$1')
-		 );
+                   jQuery(this).
+                   find('tbody > tr > td > table > tbody > tr > td > a > b').
+                   html().
+                   replace(/.*?\(([\d]+) perc\)/,'$1')
+                 );
     ids[i] = jQuery(this).attr('id');
   });
 
@@ -50,12 +50,13 @@ loadScript("http://code.jquery.com/jquery-latest.js", function() {
 
   // visszarak!
   jQuery(base).each(function(i) {
-    jQuery(this).replaceWith(
-	      '<table id="' + 
-	      ids[i] + 
-	      '" class="cat-table" cellspacing="0">' + 
-	      tables[i] + 
-	     '</table>'
-	    );
+    jQuery(this).
+      replaceWith(
+        '<table id="' + 
+        ids[i] + 
+        '" class="cat-table" cellspacing="0">' + 
+        tables[i] + 
+        '</table>'
+      );
   });
 });
