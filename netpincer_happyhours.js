@@ -5,8 +5,8 @@ function loadScript(url, callback) {
   var done = false;
   script.onload = script.onreadystatechange = function() {
     if( !done && (!this.readyState || 
-	           this.readyState == "loaded" || 
-		   this.readyState == "complete") ) {
+                  this.readyState == "loaded" || 
+                  this.readyState == "complete") ) {
       done = true;
       callback();
       // Handle memory leak in IE
@@ -21,8 +21,8 @@ loadScript("http://code.jquery.com/jquery-latest.js", function() {
   xpath = 'form:has(table) > table';
   jQuery(xpath).each(function(i) {
     if (jQuery(this).
-	find('div[class="cat-logo"] > img').
-	attr('src') != '/template/_content/happy_logo.gif') {
+        find('div[class="cat-logo"] > img').
+        attr('src') != '/template/_content/happy_logo.gif') {
       jQuery(this).hide();
     }
   });
